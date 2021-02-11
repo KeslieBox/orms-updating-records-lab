@@ -24,10 +24,10 @@ class Student
   end
 
   def self.drop_table
-      sql = <<-SQL 
+    sql = <<-SQL 
       DROP TABLE students
-      SQL
-      DB[:conn].execute(sql)
+    SQL
+    DB[:conn].execute(sql)
   end
 
   def save
@@ -59,7 +59,7 @@ class Student
   end
 
   def self.new_from_db(row)
-    new_student = self.new
+    new_student = self.new(row)
     new_student.id = row[0]
     new_student.name = row[1]
     new_student.grade = row[2]
@@ -77,7 +77,6 @@ class Student
     DB[:conn].execute(sql, name).map do |row|
       self.new_from_db(row)
     end.first
- 
   end
 
 end
